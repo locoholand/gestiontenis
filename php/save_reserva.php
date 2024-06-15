@@ -3,21 +3,29 @@ require_once 'main.php';
 
 #Almacenando datos
 
-$fecha = limpiar_cadena($_POST['fecha']);
 $pista_id = limpiar_cadena($_POST['pistas']);
 $user_id = limpiar_cadena($_POST['user_id']);
+$fecha = limpiar_cadena($_POST['fecha']);
+
+$hora = limpiar_cadena($_POST['hora']);
+$time=$fecha.'T'.$hora;
+
+
+
 
 $conection = conection();
 
 #Verificar usuario
 $check_reserva = conection();
-$check_reserva = $check_reserva->query("select id_reserva from reserva where pista_id = '$pista_id' && fecha = '$fecha'");
-if ($check_reserva->rowCount() > 0) {
+$check_time = $check_reserva->query("select id_reserva from reserva where pista_id = '$pista_id' && fecha = '$time'");
+
+
+if ($check_time->rowCount() > 0) {
 
     echo
     '<div class="notification is-danger is-light">
          <strong>¡Ocurrio un error inesperado!</strong><br>
-        Esta pista a esta hora ya existe!!!.
+        Esta pista a esta hora ya está reservada!!!.
         </div>';
     exit();
 }
@@ -29,7 +37,7 @@ $save_reserva = conection();
 VALUES(:user_dnim, :user_namem, :user_last_namem, :user_userm, :passm, :user_rolem, :user_emailm, :user_avatarm)");
  */
 
-$save_reserva = $save_reserva->query("insert into reserva(user_id, pista_id, fecha) VALUES('$user_id', '$pista_id', '$fecha')");
+$save_reserva = $save_reserva->query("insert into reserva(user_id, pista_id, fecha) VALUES('$user_id', '$pista_id', '$time')");
 
 /* $marcadores = [
     ":user_dnim" => $user_dni,
@@ -45,11 +53,11 @@ $save_reserva = $save_reserva->query("insert into reserva(user_id, pista_id, fec
 
 $save_user->execute($marcadores); */
 
-echo $save_reserva->rowCount();
+
 if ($save_reserva->rowCount() == 1) {
     echo
-    '<div class="notification is-danger is-light">
-         <strong>Reserva REGISTRADO!</strong><br>
+    '<div class="notification is-info is-light">
+         <strong>Reserva REGISTRADA!</strong><br>
         La reserva se resgistró correctamente!!!.
         </div>';
 } else {

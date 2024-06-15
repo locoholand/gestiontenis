@@ -39,30 +39,18 @@ if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}", $clase_desc)) {
     exit();
 }
 
-#Verificar pista
-$check_clases = conection();
-$check_clases = $check_clases->query("select tipoclases_nombre from tipo_clases where tipoclases_nombre  = '$tipoclases_name'");
-if ($check_clases->rowCount() > 0) {
 
-    echo
-    '<div class="notification is-danger is-light">
-         <strong>¡Ocurrio un error inesperado!</strong><br>
-        Esta clase ya existe!!!.
-        </div>';
-    exit();
-}
-$check_clases = null;
 
 
 ##Guardando datos
 $save_clases = conection();
 
 
-$save_clases = $save_clases->query("insert into tipo_clases(tipoclases_nombre, user_id, descripcion_clase) VALUES('$tipoclases_name', '$user_id', '$clase_desc')");
+$save_clases = $save_clases->query("insert into tipo_clases(tipoclases_nombre, descripcion_clase) VALUES('$tipoclases_name', '$clase_desc')");
 
 if ($save_clases->rowCount() == 1) {
     echo
-    '<div class="notification is-danger is-light">
+    '<div class="notification is-info is-light">
          <strong>¡CLASE REGISTRADA!</strong><br>
         La clase se resgistró correctamente!!!.
         </div>';

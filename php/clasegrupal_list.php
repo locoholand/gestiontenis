@@ -13,8 +13,8 @@
     } else {
         
 
-        $query = "select * from clases_grupal where clase_id != '" . $_SESSION['id']
-            . "'order by descripcion_clase asc limit $start, $register_page";
+        $query = "select * from clases_grupal join tipo_clases on clases_grupal.tipoclases_id=tipo_clases.tipoclases_id join users 
+        on clases_grupal.user_id=users.user_id join pistas on clases_grupal.pista_id=pistas.pista_id  order by clases_grupal.descripcion_clase asc limit $start, $register_page";
 
         $total_query = "select count(clase_id) from clases_grupal where clase_id != '"
             . $_SESSION['id'] . " '";
@@ -35,15 +35,14 @@
     $table .= '<div class="table-container">
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
-                <tr class="has-text-centered">
-                    <th>#</th>
-                    <th>Descripción</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
+                <tr class="has-text-centered">   
+                    <th>Tipo de clase</th>                   
+                    <th>Descripción</th>                   
                     <th>Cantidad de alumnos</th>
                     <th>Monitor</th>
                     <th>Pista</th>
-                    <th>Activo</th>
+                    <th>Fecha</th>
+                    <th colspan="2">Opciones</th>
                 </tr>
             </thead>
             <tbody>';
@@ -54,24 +53,44 @@
         $page_st = $start + 1;
 
         foreach ($datos as $rows) {
+            if  ($_SESSION['role'] == "Admin" || $_SESSION['role'] == "Monitor") { 
+                $table .= '<tr class="has-text-centered">
+                <td>' . $rows['tipoclases_nombre'] . '</td>
+
+                <td>' . $rows['descripcion_clase'] . '</td>
+                
+                <td>' . $rows['cantidad_alumno'] . '</td>
+                <td>' . $rows['user_name'] . '</td>
+                <td>' . $rows['nombre'] . '</td>
+                <td>' . $rows['fecha'] . '</td>
+                <td>
+                
+                    <a href="index.php?vista=clasesgrupal_update&clase_id_up=' . $rows['clase_id'] . '" class="button is-success is-rounded is-small">Actualizar</a>
+                </td>
+                <td>
+                    <a href="' . $url . $page . '&clase_id_del=' . $rows['clase_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
+                </td>
+            </tr>';
+        $count++;
+    
+            }else
             $table .= '<tr class="has-text-centered">
-                    <td>' . $count . '</td>
-                    <td>' . $rows['descripcion_clase'] . '</td>
-                    <td>' . $rows['fecha_inicio'] . '</td>
-                    <td>' . $rows['fecha_fin'] . '</td>
-                    <td>' . $rows['cantidad_alumno'] . '</td>
-                    <td>' . $rows['user_id'] . '</td>
-                    <td>' . $rows['pista_id'] . '</td>
-                    <td>' . $rows['activo'] . '</td>
-                    <td>
-                        <a href="index.php?vista=clasesgrupal_update&clase_id_up=' . $rows['clase_id'] . '" class="button is-success is-rounded is-small">Actualizar</a>
-                    </td>
-                    <td>
-                        <a href="' . $url . $page . '&clase_id_del=' . $rows['clase_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
-                    </td>
-                </tr>';
-            $count++;
-        }
+                <td>' . $rows['tipoclases_nombre'] . '</td>
+
+                <td>' . $rows['descripcion_clase'] . '</td>
+                
+                <td>' . $rows['cantidad_alumno'] . '</td>
+                <td>' . $rows['user_name'] . '</td>
+                <td>' . $rows['nombre'] . '</td>
+                <td>' . $rows['fecha'] . '</td>
+                <td>
+                
+                    <a href="index.php?vista=automatricula&clase_id=' . $rows['clase_id'] . '" class="button is-success is-rounded is-small">Matricularse</a>
+                </td>
+               
+            </tr>';
+        $count++;
+           }
         $page_end = $count - 1;
     } else {
         if ($total >= 1) {

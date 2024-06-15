@@ -11,7 +11,7 @@
         <div class="column">
             <div class="control">
 
-                <input class="input" type="text" name="pista_name" pattern="[a-zA-Z1-9 ]{3,40}" maxlength="40" placeholder="Introduzca el nombre de la pista">
+                <input class="input" type="text" name="pista_name" pattern="[a-zA-Z1-9 ]{2,10}" maxlength="40" placeholder="Introduzca el nombre de la pista">
             </div>
         </div>
 

@@ -18,134 +18,130 @@
             <a href="index.php?vista=home" class="navbar-item">
                 Inicio
             </a>
-<?php
-if($_SESSION['role']=='Admin'){
-    ?>
-<div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Usuarios
-                </a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=new_user" class="navbar-item">
-                        Nuevo
-                    </a>
-
-                    <a href="index.php?vista=user_list" class="navbar-item">
-                        Listar Usuarios
-                    </a>
-
-                    <a href="index.php?vista=user_search" class="navbar-item">
-                        Buscar Usuarios
-                    </a>
-                    
-                    <hr class="navbar-divider">
-                    
-                </div>
-
-                
-            </div>
-    <?php
-}
-
-if($_SESSION['role']=='Admin'|| $_SESSION['role']=='Monitor'){
-?>
-            
-            
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Pistas
-                </a>
-                
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=new_pista" class="navbar-item">
-                        Nueva Pista
-                    </a>
-
-                    <a href="index.php?vista=pista_list" class="navbar-item">
-                        Listado de Pistas
-                    </a>
-
-                </div>
-            </div>
             <?php
-}
-if($_SESSION['role']!='No socio'){
+            if ($_SESSION['role'] == 'Admin') {
+            ?>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Usuarios
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=new_user" class="navbar-item">
+                            Nuevo
+                        </a>
+
+                        <a href="index.php?vista=user_list" class="navbar-item">
+                            Listar Usuarios
+                        </a>
+
+                        <hr class="navbar-divider">
+
+                    </div>
+
+
+                </div>
+            <?php
+            }
+
+            if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Monitor') {
+            ?>
+
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Pistas
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=new_pista" class="navbar-item">
+                            Nueva Pista
+                        </a>
+
+                        <a href="index.php?vista=pista_list" class="navbar-item">
+                            Listado de Pistas
+                        </a>
+
+                    </div>
+                </div>
+            <?php
+            }
+            if ($_SESSION['role'] != 'No socio') {
 
 
             ?>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Reservas
-                </a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=new_reserva_tenis" class="navbar-item">
-                        Tenis
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Reservas
                     </a>
 
-                    <a href="index.php?vista=new_reserva_padel" class="navbar-item">
-                        Padel
-                    </a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=new_reserva_tenis" class="navbar-item">
+                            Tenis
+                        </a>
+
+                        <a href="index.php?vista=new_reserva_padel" class="navbar-item">
+                            Padel
+                        </a>
+
+                    </div>
 
                 </div>
+            <?php
+            } ?>
+            <?php
+            if ($_SESSION['role'] == "Admin" || $_SESSION['role'] == "Monitor") {
+                ?>
 
-            </div>
-<?php
-}?>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Tipos de Clases
-                </a>
 
-                <div class="navbar-dropdown">
-                    <?php
-                    if ($_SESSION['role']!="Socio"&&$_SESSION['role']!="No socio"){
-                        ?>
-                        <a href="index.php?vista=new_tipoclases" class="navbar-item">
-                        Alta
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Tipos de Clases
                     </a>
-                        <?php
+
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=new_tipoclases" class="navbar-item">
+                            Alta
+                        </a>
+
+
+
+
+
+                        <a href="index.php?vista=clase_list" class="navbar-item">
+                            Listado
+                        </a>
+
+                    </div>
+
+                </div> <?php
                     }
 
-                    ?>
+                        ?>
 
-
-                    
-                
-                    <a href="index.php?vista=clase_list" class="navbar-item">
-                        Listado
-                    </a>
-
-                </div>
-
-            </div>
-<?php if($_SESSION['role']=='Admin'||$_SESSION['role']=='Monitor'){
-    ?>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     Clases Grupales
                 </a>
 
                 <div class="navbar-dropdown">
+         <?php       if ($_SESSION['role'] == "Admin" || $_SESSION['role'] == "Monitor") {                        ?>
+
                     <a href="index.php?vista=new_clasegrupal" class="navbar-item">
                         Alta de clase
                     </a>
-                
+                    <?php } ?>
                     <a href="index.php?vista=clasegrupal_list" class="navbar-item">
                         Listado
                     </a>
 
-                    <a href="index.php?vista=clasegrupal_search" class="navbar-item">
-                        Buscar Clase
-                    </a>               
 
                 </div>
 
             </div>
-            <?php
-            }?>
+
 
         </div>
 

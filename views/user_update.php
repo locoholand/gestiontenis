@@ -1,7 +1,7 @@
 <?php
 require_once "./php/main.php";
 
-$id = (isset($_GET['tipoclases_id_up'])) ?  $_GET['tipoclases_id_up'] : 0;
+$id = (isset($_GET['user_id_up'])) ?  $_GET['user_id_up'] : 0;
 $id = limpiar_cadena($id);
 ?>
 

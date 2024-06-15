@@ -13,8 +13,6 @@ $user_email = limpiar_cadena($_POST['user_email']);
 $user_role = $_POST['user_role'];
 //$user_avatar = limpiar_cadena($_POST['user_avatar']);
 
-var_dump($user_role);
-
 # Verificar campos obligatorios
 
 if (

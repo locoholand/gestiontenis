@@ -53,9 +53,7 @@
                     <td>' . $rows['tipoclases_nombre'] . '</td>
                     <td>' . $rows['user_name'] . '</td>
                     <td>' . $rows['descripcion_clase'] . '</td> 
-                    <td>
-                        <a href="index.php?vista=clase_update&tipoclases_id_up=' . $rows['tipoclases_id'] . '" class="button is-success is-rounded is-small">Actualizar</a>
-                    </td>
+                    
                     <td>
                         <a href="' . $url . $page . '&tipoclases_id_del=' . $rows['tipoclases_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>

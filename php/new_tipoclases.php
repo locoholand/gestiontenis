@@ -41,19 +41,6 @@ if (verificar_datos("[a-zA-Z0-9]{4,20}", $clase_desc)) {
     exit();
 }
 
-#Verificar pista
-$check_clases = conection();
-$check_clases = $check_clases->query("select tipoclases_nombre from tipo_clases where tipoclases_nombre = '$tipoclases_name'");
-if ($check_clases->rowCount() > 0) {
-
-    echo
-    '<div class="notification is-danger is-light">
-         <strong>¡Ocurrio un error inesperado!</strong><br>
-        Esa clase ya existe!!!.
-        </div>';
-    exit();
-}
-$check_clases = null;
 
 ##Guardando datos
 $save_clases = conection();
